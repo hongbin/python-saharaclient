@@ -58,14 +58,16 @@ class Client(object):
                     try:
                         sahara_catalog_url = keystone.session.get_endpoint(
                             auth, interface=endpoint_type,
-                            service_type=service_type)
+                            service_type=service_type,
+                            region_name=region_name)
                     except kex.EndpointNotFound:
                         # This is support of 'data_processing' service spelling
                         # which was used for releases before Kilo
                         service_type = service_type.replace('-', '_')
                         sahara_catalog_url = keystone.session.get_endpoint(
                             auth, interface=endpoint_type,
-                            service_type=service_type)
+                            service_type=service_type,
+                            region_name=region_name)
             else:
                 keystone = self.get_keystone_client(
                     username=username,
